@@ -8,6 +8,8 @@
 #include <time.h>
 #include <sched.h>
 
+#define INCLUDE_NOP
+
 #define RDTSC(hi, lo)			\
   {					\
     asm volatile (	       		\
@@ -68,7 +70,9 @@ void take_gettime_measurements(uint64_t **results)
     for(j = 0; j < SAMPLES; j++) {
       // take a baseline measurement
       clock_gettime(CLOCK_REALTIME, t1);
-      //NOP_16
+      #ifdef INCLUDE_NOP
+      NOP_16      
+      #endif
       clock_gettime(CLOCK_REALTIME, t2);
       
       results[i][j] = delta_struct(t1, t2);
@@ -95,7 +99,9 @@ void take_tsc_measurements(uint64_t **results)
   for(i = 0; i < LOOPS; i++) {
     for(j = 0; j < SAMPLES; j++) {
       RDTSC(hi, lo);
-      //NOP_16
+      #ifdef INCLUDE_NOP
+      NOP_16      
+      #endif
       RDTSCP(hi2, lo2);
 
       pre = JOIN(hi, lo);
