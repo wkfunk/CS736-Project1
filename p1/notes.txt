@@ -1,0 +1,36 @@
+NOTES: 
+- assembly: https://www.aldeid.com/wiki/X86-assembly/Instructions/rdtsc
+- read more about rdtsc: https://randomascii.wordpress.com/2011/07/29/rdtsc-in-the-age-of-sandybridge/
+- differences between different intel procs: https://en.wikipedia.org/wiki/Time_Stamp_Counter#Implementation_in_various_processors
+- invariant tsc:
+  - ( dev manual, section 17.13.1): The time stamp counter in newer processors may support an enhancement, referred to as invariant TSC. Processor’s support for invariant TSC is indicated by CPUID.80000007H:EDX[8]. The invariant TSC will run at a constant rate in all ACPI P-, C-. and T-states. This is the architectural behavior moving forward. On processors with invariant TSC support, the OS may use the TSC for wall clock timer services (instead of ACPI or HPET timers). TSC reads are much more efficient and do not incur the overhead associated with a ring transition or access to a platform resource.
+  - does the i5-4570 have invariant tsc support?
+
+- intel hpc perf measurement: https://software.intel.com/en-us/articles/measuring-performance-in-hpc
+  - also has code for writing rdtscp (includes proc id) if necessary, and good __asm code
+
+- good forum post, maybe from a former 736 student: http://www.unix.com/programming/81639-rdtsc-use-c.html
+
+
+- code similar to what's in the intel hpc article: https://unix4lyfe.org/benchmarking/
+
+
+
+
+TODO:
+- sched_setaffinity: http://man7.org/linux/man-pages/man2/sched_setaffinity.2.html
+  - see https://software.intel.com/en-us/forums/intel-isa-extensions/topic/288625
+
+
+
+
+READING:
+- good blog post: https://www.strchr.com/performance_measurements_with_rdtsc
+
+- very knowledgeable dude talking about tsc: https://software.intel.com/en-us/forums/software-tuning-performance-optimization-platform-monitoring/topic/531142
+
+- great intel whitepaper explaining CPUID serialization: http://www.intel.com/content/dam/www/public/us/en/documents/white-papers/ia-32-ia-64-benchmark-code-execution-paper.pdf
+
+- (to read): https://unix4lyfe.org/benchmarking/
+
+- gcc macro functions: https://gcc.gnu.org/onlinedocs/cpp/Function-like-Macros.html#Function-like-Macros
